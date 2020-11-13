@@ -17,5 +17,8 @@ public class Board {
 	public int getColumns() {
 		return boardColumns;
 	}
-	
+
+	public int[][] getBoard(){
+		return board;
+	}
 }
