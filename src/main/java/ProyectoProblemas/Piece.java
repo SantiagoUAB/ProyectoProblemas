@@ -18,21 +18,6 @@ public class Piece {
 		shape = shapes[shapeType];
 	}
 	
-	public int[][] getShape() {
-		return shape;
-	}
-	
-	public int getShapeType() {
-		return shapeType;
-	}
-	
-	public int getX(int block) {
-		return shape[block][0];
-	}
-	
-	public int getY(int block) {
-		return shape[block][1];
-	}
 	
 	public Piece rotateLeft() {
 		Piece newPiece = new Piece(shapeType);
@@ -55,4 +40,21 @@ public class Piece {
 		newPiece.shape = newShape;
 		return newPiece;
 	}
+	
+	public int[][] getShape() {
+		return shape;
+	}
+	
+	public int getShapeType() {
+		return shapeType;
+	}
+	
+	public int getX(int block) {
+		return shape[block][0];
+	}
+	
+	public int getY(int block) {
+		return shape[block][1];
+	}
+	
 }

@@ -10,18 +10,6 @@ public class Board {
 		board = new int[boardRows][boardColumns];
 	}
 	
-	public int getRows() {
-		return boardRows;
-	}
-	
-	public int getColumns() {
-		return boardColumns;
-	}
-
-	public int[][] getBoard(){
-		return board;
-	}
-
 	public boolean isOccupied(int row, int column) {
 		return board[row][column] != 0;
 	}
@@ -63,8 +51,21 @@ public class Board {
 			}
 		}
 	}
+	
+	public int getRows() {
+		return boardRows;
+	}
+	
+	public int getColumns() {
+		return boardColumns;
+	}
+
+	public int[][] getBoard(){
+		return board;
+	}
 
 	//FUNCTIONS ONLY NEEDED FOR TESTING
+	
 	public void proxySetValueToCoord(int column, int row, int value) {
 		setValueToCoord(column, row, value);
 	}

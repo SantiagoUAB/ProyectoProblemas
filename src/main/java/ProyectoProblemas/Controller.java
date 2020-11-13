@@ -1,5 +1,9 @@
 package ProyectoProblemas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
 public class Controller {
 	
 	private Piece currentPiece;
@@ -13,6 +17,10 @@ public class Controller {
 		currentY =0;
 	}
 
+	public void startGame() {
+		
+	}
+	
 	private boolean tryAction(Piece newPiece, int moveX, int moveY) {	
 		for (int i=0; i<4; i++) {
 			int newColumn = newPiece.getX(i) + moveX + currentX;
@@ -29,6 +37,10 @@ public class Controller {
 	
 	private boolean outofLimit(int row, int column) {
 		return (column<0 || column >= board.getColumns() || row<0 || row>= board.getRows());
+	}
+	
+	private int generateRandomShape() {
+		return 100;
 	}
 	
 	//FUNCTIONS ONLY NEEDED FOR TESTING
@@ -49,6 +61,11 @@ public class Controller {
 	public void setCustomBoard(int[][] boardArray) {
 		board.setCustomBoard(boardArray);
 	}
+	
+	public int proxyGenerateRandomShape(){
+		return generateRandomShape();
+	}
+	
 	
 	
 }

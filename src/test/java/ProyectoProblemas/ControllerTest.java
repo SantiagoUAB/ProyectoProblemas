@@ -69,4 +69,12 @@ public class ControllerTest {
 		boolean caseD = controller.proxyTryAction(piece, 0, 1);
 		assertFalse(caseD);
 	}
+	
+	@Test
+	public void generateRandomShapeTest() {
+		for (int i=0; i<15; i++) {
+			int inputType = controller.proxyGenerateRandomShape();
+			assertTrue(inputType>=0 && inputType<=6);
+		}
+	}
 }
