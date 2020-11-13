@@ -55,7 +55,8 @@ public class BoardTest {
     	assertTrue(Arrays.deepEquals(testArray, board.getBoard()));
     	
     	
-    	// Cas en el que es completa la linea de més amunt
+    	// Cas en el que es completa la linea de més amunt (cas límit)
+    	board = new Board();
     	for(int i = 0; i < board.getColumns(); i++) {
     		board.proxySetValueToCoord(0, i, 1);
     	}
@@ -74,7 +75,7 @@ public class BoardTest {
     	int[][] zeroArray = new int[20][10];
     	assertFalse(Arrays.deepEquals(zeroArray, board.getBoard()));
     	
-    	board.proxyEliminateCompleteRows();
+    	board.proxyRemoveCompleteRows();
     	assertTrue(Arrays.deepEquals(zeroArray, board.getBoard()));
     }
 }
