@@ -1,5 +1,5 @@
 package ProyectoProblemas;
 
-public class Shape {
+public class Controller {
 	
 }
