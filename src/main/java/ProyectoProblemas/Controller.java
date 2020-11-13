@@ -1,7 +1,7 @@
 package ProyectoProblemas;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Controller {
@@ -60,6 +60,34 @@ public class Controller {
 	
 	private void rotateRight() {
 		tryAction(currentPiece.rotateRight(), 0, 0);
+	}
+	
+	private class InputListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			
+			switch (key) {
+				case KeyEvent.VK_Z:
+					rotateLeft();
+					break;
+				case KeyEvent.VK_X:
+					rotateRight();
+					break;
+				case KeyEvent.VK_LEFT:
+					moveLeft();
+					break;
+				case KeyEvent.VK_RIGHT:
+					moveRight();
+					break;
+				case KeyEvent.VK_DOWN:
+					//softDrop();
+					break;
+				case KeyEvent.VK_SPACE:
+					//hardDrop();
+					break;
+			}
+		}
 	}
 	
 	//FUNCTIONS ONLY NEEDED FOR TESTING
