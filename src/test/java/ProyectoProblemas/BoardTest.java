@@ -32,17 +32,50 @@ public class BoardTest {
     }
     
     @Test
+    public void checkCompleteLineTest() {
+    	assertFalse(board.proxyIsLineComplete(board.getRows()-1) == true);
+    	
+    	for(int i = 0; i < board.getColumns(); i++) {
+    		board.proxySetValueToCoord(board.getRows()-1, i, 1);
+    	}
+    	assertTrue(board.proxyIsLineComplete(board.getRows()-1) == true);
+    }
+    
+    @Test
+    public void removeLineTest() {
+    	// Cas en el que es completa una fila no problematica
+    	for(int i = 0; i < board.getColumns(); i++) {
+    		board.proxySetValueToCoord(board.getRows()-2, i, 1);
+    		board.proxySetValueToCoord(board.getRows()-1, i, 2);
+    	}
+    	board.proxyRemoveLine(board.getRows()-1);
+    	int[][] testArray = new int[20][10];
+    	for(int i = 0; i < board.getColumns(); i++) {
+    		testArray[19][i] = 1;
+    	}
+    	assertTrue(Arrays.deepEquals(testArray, board.getBoard()));
+    	
+    	
+    	// Cas en el que es completa la linea de més amunt
+    	for(int i = 0; i < board.getColumns(); i++) {
+    		board.proxySetValueToCoord(0, i, 1);
+    	}
+    	board.proxyRemoveLine(0);
+    	int[][] testArray1 = new int[20][10];
+    	assertTrue(Arrays.deepEquals(testArray1, board.getBoard()));
+    }
+    
+    @Test
     public void removeCompleteLinesTest() {
     	for(int i = 0; i < board.getColumns(); i++) {
-    		board.setValueToCoord(board.getRows()-1, i, 1);
-    		board.setValueToCoord(board.getRows()-2, i, 1);
+    		board.proxySetValueToCoord(board.getRows()-2, i, 1);
+    		board.proxySetValueToCoord(board.getRows()-1, i, 1);
     	}
-    	assertTrue(board.isLineComplete(board.getRows()-2), true);
     	
     	int[][] zeroArray = new int[20][10];
     	assertFalse(Arrays.deepEquals(zeroArray, board.getBoard()));
     	
-    	board.eliminateCompleteRows();
+    	board.proxyEliminateCompleteRows();
     	assertTrue(Arrays.deepEquals(zeroArray, board.getBoard()));
     }
 }
