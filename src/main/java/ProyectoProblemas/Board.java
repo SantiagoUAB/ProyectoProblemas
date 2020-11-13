@@ -20,7 +20,11 @@ public class Board {
 
 	public int[][] getBoard(){
 		return board;
-	}	
+	}
+
+	public boolean isOccupied(int row, int column) {
+		return board[row][column] != 0;
+	}
 	
 	private void setValueToCoord(int row, int column, int value) {
 		board[row][column] = value;
