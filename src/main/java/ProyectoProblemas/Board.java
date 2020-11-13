@@ -18,5 +18,4 @@ public class Board {
 		return boardColumns;
 	}
 	
-	
 }

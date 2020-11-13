@@ -16,4 +16,11 @@ public class BoardTest {
     	assertTrue(columns==10);
     }
     
+    @Test
+    public void boardZeroTest() {
+    	Board board = new Board();
+    	int[][] boardArray = board.getBoard();
+    	int[][] zeroArray = new int[20][10];
+    	assertTrue(Arrays.deepEquals(zeroArray, boardArray));
+    }
 }
