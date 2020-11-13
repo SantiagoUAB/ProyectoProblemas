@@ -25,4 +25,6 @@ public class Piece {
 	public int getShapeType() {
 		return shapeType;
 	}
+	
+	
 }
