@@ -12,9 +12,10 @@ public class Controller {
 	private int currentY;
 	
 	public Controller() {
+		currentPiece = new Piece(generateRandomShape());
 		board = new Board();
-		currentX=0;
-		currentY =0;
+		currentX = 0;
+		currentY = 0;
 	}
 
 	public void startGame() {
@@ -45,6 +46,14 @@ public class Controller {
 		return res;
 	}
 	
+	private void rotateLeft() {
+		tryAction(currentPiece.rotateLeft(), 0, 0);
+	}
+	
+	private void rotateRight() {
+		tryAction(currentPiece.rotateRight(), 0, 0);
+	}
+	
 	//FUNCTIONS ONLY NEEDED FOR TESTING
 	
 	public boolean proxyOutofLimit(int row, int column) {
@@ -60,6 +69,10 @@ public class Controller {
 		currentY = row;
 	}
 	
+	public int getCurrentX() {
+		return(currentX);
+	}
+	
 	public void setCustomBoard(int[][] boardArray) {
 		board.setCustomBoard(boardArray);
 	}
@@ -68,6 +81,21 @@ public class Controller {
 		return generateRandomShape();
 	}
 	
+	public void proxyMoveLeft() {
+		moveLeft();
+	}
+	
+	public void proxyMoveRight() {
+		moveRight();
+	}
+	
+	public void proxyRotateLeft() {
+		rotateLeft();
+	}
+	
+	public void proxyRotateRight() {
+		rotateRight();
+	}
 	
 	
 }

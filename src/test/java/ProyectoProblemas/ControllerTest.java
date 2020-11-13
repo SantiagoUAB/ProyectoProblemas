@@ -77,4 +77,14 @@ public class ControllerTest {
 			assertTrue(inputType>=0 && inputType<=6);
 		}
 	}
+	
+	@Test
+	public void moveLeftTest() {
+		controller.setCurrentPosition(5, 5);
+		controller.proxyMoveLeft();
+		assertTrue(controller.getCurrentX()==4);
+	}
+	
+	
+	
 }
