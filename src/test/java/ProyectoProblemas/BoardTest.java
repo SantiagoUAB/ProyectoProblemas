@@ -3,9 +3,11 @@ package ProyectoProblemas;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 public class BoardTest {
 	
-    @Test 
+    @Test
     public void boardTest() {
     	Board board = new Board();
     	int rows = board.getRows();
@@ -13,4 +15,5 @@ public class BoardTest {
     	assertTrue(rows==20);
     	assertTrue(columns==10);
     }
+    
 }
