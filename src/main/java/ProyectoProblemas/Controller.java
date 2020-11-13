@@ -46,6 +46,14 @@ public class Controller {
 		return res;
 	}
 	
+	private void moveLeft() {
+		tryAction(currentPiece, -1, 0);
+	}
+	
+	private void moveRight() {
+		tryAction(currentPiece, +1, 0);
+	}
+	
 	private void rotateLeft() {
 		tryAction(currentPiece.rotateLeft(), 0, 0);
 	}
