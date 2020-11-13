@@ -31,12 +31,22 @@ public class BoardTest {
     }
     
     @Test
+    public void checkCompleteLineTest() {
+    	assertFalse(board.isLineComplete(board.getRows()-1) == true);
+    	
+    	for(int i = 0; i < board.getColumns(); i++) {
+    		board.setValueToCoord(board.getRows()-1, i, 1);
+    	}
+    	assertTrue(board.isLineComplete(board.getRows()-1) == true);
+    }
+    
+    @Test
     public void removeCompleteLinesTest() {
     	for(int i = 0; i < board.getColumns(); i++) {
     		board.setValueToCoord(board.getRows()-1, i, 1);
     		board.setValueToCoord(board.getRows()-2, i, 1);
     	}
-    	assertTrue(board.isLineComplete(board.getRows()-2), true);
+    	assertTrue(board.isLineComplete(board.getRows()-2) == true);
     	
     	int[][] zeroArray = new int[20][10];
     	assertFalse(Arrays.deepEquals(zeroArray, board.getBoard()));
