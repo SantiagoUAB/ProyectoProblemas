@@ -26,5 +26,12 @@ public class Piece {
 		return shapeType;
 	}
 	
-	
+	public void rotateShape() {
+		int[][] newShape = new int[4][2];
+		for (int a=0; a<4; a++) {
+			newShape[a][0] = shape[a][1];			//x = (y)
+			newShape[a][1] = -shape[a][0];			//y = (-x)
+		}
+		shape = newShape;
+	}
 }

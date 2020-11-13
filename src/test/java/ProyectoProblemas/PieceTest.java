@@ -30,9 +30,6 @@ public class PieceTest {
 		int[][] testPiece = {{0,0},{0,-1},{1,-1},{2,-1}};
 		piece.rotateShape();
 		int[][] jpiece = piece.getShape();
-		for (int a=0; a<4; a++) {
-			System.out.println(Arrays.toString(jpiece[a]));
-		}
 		assertTrue(Arrays.deepEquals(jpiece, testPiece));
 	}
 
