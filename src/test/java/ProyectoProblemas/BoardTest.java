@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 public class BoardTest {
+	
 	Board board;
 	
 	@Before

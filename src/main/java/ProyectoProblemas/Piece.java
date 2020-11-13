@@ -26,6 +26,14 @@ public class Piece {
 		return shapeType;
 	}
 	
+	public int getX(int block) {
+		return shape[block][0];
+	}
+	
+	public int getY(int block) {
+		return shape[block][1];
+	}
+	
 	public void rotateShape() {
 		int[][] newShape = new int[4][2];
 		for (int a=0; a<4; a++) {
