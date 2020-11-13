@@ -33,5 +33,11 @@ public class PieceTest {
 		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
 	}
 	
-	
+	@Test
+	public void rotateRightTest() {
+		int[][] testPiece = {{0,0},{0,-1},{1,-1},{2,-1}};
+		Piece jpiece = piece.rotateRight();
+		int[][] rotatedShape = jpiece.getShape();
+		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
+	}
 }
