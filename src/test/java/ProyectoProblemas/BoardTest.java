@@ -79,4 +79,13 @@ public class BoardTest {
     	board.proxyRemoveCompleteRows();
     	assertTrue(Arrays.deepEquals(zeroArray, board.getBoard()));
     }
+    
+    @Test
+    public void isOccupiedTest() {
+    	board.proxySetValueToCoord(0, 1, 4);
+    	boolean occupied = board.isOccupied(0, 1);
+    	boolean notOccupied = board.isOccupied(0, 2);
+    	assertTrue(occupied == true);
+    	assertTrue(notOccupied == false);
+    }
 }
