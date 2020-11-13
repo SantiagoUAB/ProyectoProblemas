@@ -3,7 +3,7 @@ package ProyectoProblemas;
 public class Board {
 	private final int boardRows = 20;
 	private final int boardColumns = 10;
-	private final int[][] board;
+	private int[][] board;
 	
 	
 	public Board() {
@@ -64,6 +64,7 @@ public class Board {
 		}
 	}
 
+	//FUNCTIONS ONLY NEEDED FOR TESTING
 	public void proxySetValueToCoord(int column, int row, int value) {
 		setValueToCoord(column, row, value);
 	}
@@ -78,5 +79,9 @@ public class Board {
 	
 	public void proxyRemoveLine(int row) {
 		removeLine(row);
+	}
+	
+	public void setCustomBoard(int[][] boardArray) {
+		board = boardArray;
 	}
 }

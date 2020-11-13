@@ -29,14 +29,17 @@ public class ControllerTest {
 		
 		//doesn't collide vertical move
 		boolean caseA = controller.proxyTryAction(piece, 0, 1);
+		assertTrue(caseA);
 		
 		//collides with wall while rotating
 		controller.setCurrentPosition(19,9);
-		boolean caseB = controller.proxyTryAction(piece.rotateShape(), 0, 0);
+		boolean caseB = controller.proxyTryAction(piece.rotateLeft(), 0, 0);
+		assertFalse(caseB);
 		
 		//doesn't collide horizontal move
 		controller.setCurrentPosition(10,5);
 		boolean caseC = controller.proxyTryAction(piece, 1, 0);
+		assertTrue(caseC);
 		
 		//collides with another block
 		int[][] boardArray = {
@@ -50,26 +53,20 @@ public class ControllerTest {
 				{0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,1,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
 				{1,1,1,1,1,1,1,1,1,1},
 				{1,1,1,1,1,1,1,1,1,1}
 			};
     	controller.setCustomBoard(boardArray);
 		controller.setCurrentPosition(10,5);
 		boolean caseD = controller.proxyTryAction(piece, 0, 1);
-		
-		
-		assertTrue(caseA);
-		assertFalse(caseB);
-		assertTrue(caseC);
-		assertTrue(caseD);
+		assertFalse(caseD);
 	}
-
 }

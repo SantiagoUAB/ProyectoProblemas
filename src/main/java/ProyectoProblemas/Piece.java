@@ -34,12 +34,14 @@ public class Piece {
 		return shape[block][1];
 	}
 	
-	public void rotateShape() {
+	public Piece rotateLeft() {
+		Piece newPiece = new Piece(shapeType);
 		int[][] newShape = new int[4][2];
 		for (int a=0; a<4; a++) {
 			newShape[a][0] = shape[a][1];			//x = (y)
 			newShape[a][1] = -shape[a][0];			//y = (-x)
 		}
-		shape = newShape;
+		newPiece.shape = newShape;
+		return newPiece;
 	}
 }
