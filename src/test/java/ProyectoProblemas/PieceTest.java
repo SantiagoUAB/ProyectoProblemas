@@ -17,7 +17,7 @@ public class PieceTest {
 	}
 	
 	@Test
-	public void testCreateShape() {		
+	public void createShapeTest() {		
 		int[][] testPiece = {{0,0},{1,0},{1,1},{1,2}};
 		int[][] jpiece = piece.getShape();
 		int shapeType = piece.getShapeType();
@@ -26,7 +26,7 @@ public class PieceTest {
 	}
 	
 	@Test
-	public void testRotateShape() {
+	public void rotateShapeTest() {
 		int[][] testPiece = {{0,0},{0,-1},{1,-1},{2,-1}};
 		piece.rotateShape();
 		int[][] jpiece = piece.getShape();
