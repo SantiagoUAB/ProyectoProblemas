@@ -40,7 +40,9 @@ public class Controller {
 	}
 	
 	private int generateRandomShape() {
-		return 100;
+		Random rand = new Random();
+		int res = Math.abs(rand.nextInt()) % 6 + 1;
+		return res;
 	}
 	
 	//FUNCTIONS ONLY NEEDED FOR TESTING
