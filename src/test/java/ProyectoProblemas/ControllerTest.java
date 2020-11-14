@@ -18,10 +18,25 @@ public class ControllerTest {
 	
 	@Test
 	public void outofLimitTest() {
+		//normal favorable case
 		boolean caseA = controller.proxyOutofLimit(0,0);
-		boolean caseB = controller.proxyOutofLimit(-10,14);
 		assertFalse(caseA);
+		
+		//negative number case
+		boolean caseB = controller.proxyOutofLimit(-9,5);
 		assertTrue(caseB);
+		
+		//frontier case
+		boolean caseC = controller.proxyOutofLimit(20,5);
+		assertTrue(caseC);
+		
+		//frontier favorable case
+		boolean caseD = controller.proxyOutofLimit(19,5);
+		assertFalse(caseD);
+		
+		//extra test to cover all possible options
+		boolean caseE = controller.proxyOutofLimit(4,-21);
+		assertTrue(caseE);
 	}
 	
 	@Test
@@ -89,6 +104,7 @@ public class ControllerTest {
 	
 	@Test
 	public void fixPieceToBoardTest() {
+		//Normal insertion
 		int[][] boardArray = {
 				{0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
@@ -113,9 +129,35 @@ public class ControllerTest {
 			};
 		controller.setCustomBoard(boardArray);
 		controller.setCurrentPosition(5,5);
-		controller.fixPieceToBoard();
+		controller.proxyFixPieceToBoard();
 		assertTrue(controller.getBoard()[5][5]!=0);	
+		
+		//Insertion where some full lines are deleted
+		int[][] boardArray2 = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1}
+			};
+		controller.setCustomBoard(boardArray2);
+		controller.setCurrentPosition(5,5);
+		controller.proxyFixPieceToBoard();
+		assertTrue(controller.getBoard()[6][5]!=0);	
 	}
-	
-	
 }

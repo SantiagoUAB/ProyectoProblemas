@@ -90,6 +90,15 @@ public class Controller {
 		}
 	}
 	
+	private void fixPieceToBoard() {
+		for (int i = 0; i < 4; i++) {
+			int newColumn = currentPiece.getX(i) + currentX;
+			int newRow = currentPiece.getY(i) + currentY;
+			board.setValueToCoord(newRow, newColumn, currentPiece.getShapeType());
+		}
+		board.removeCompleteRows();
+	}
+	
 	//FUNCTIONS ONLY NEEDED FOR TESTING
 	
 	public boolean proxyOutofLimit(int row, int column) {
@@ -136,4 +145,8 @@ public class Controller {
 	public int[][] getBoard() {
 		return board.getBoard();
 	}	
+	
+	public void proxyFixPieceToBoard() {
+		fixPieceToBoard();
+	}
 }
