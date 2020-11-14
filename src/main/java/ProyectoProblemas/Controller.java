@@ -65,8 +65,13 @@ public class Controller {
 	private boolean softDrop() {
 		return tryAction(currentPiece, 0, +1);
 	}
+	
+	private void hardDrop() {
+		while(softDrop());
+		fixPieceToBoard();
+	}
 
-	private class InputListener extends KeyAdapter {
+	class InputListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
@@ -88,7 +93,7 @@ public class Controller {
 					softDrop();
 					break;
 				case KeyEvent.VK_SPACE:
-					//hardDrop();
+					hardDrop();
 					break;
 			}
 		}
@@ -98,7 +103,7 @@ public class Controller {
 		for (int i = 0; i < 4; i++) {
 			int newColumn = currentPiece.getX(i) + currentX;
 			int newRow = currentPiece.getY(i) + currentY;
-			board.setValueToCoord(newRow, newColumn, currentPiece.getShapeType());
+			board.setValueToCoord(newRow, newColumn, currentPiece.getShapeType() + 1);
 		}
 		board.removeCompleteRows();
 	}
@@ -116,6 +121,10 @@ public class Controller {
 	public void setCurrentPosition(int row, int column) {
 		currentX = column;
 		currentY = row;
+	}
+	
+	public void setCurrentPiece(int shapeType) {
+		currentPiece = new Piece(shapeType);
 	}
 	
 	public int getCurrentX() {
@@ -152,6 +161,10 @@ public class Controller {
 	
 	public void proxySoftDrop() {
 		softDrop();
+	}
+	
+	public void proxyHardDrop() {
+		hardDrop();
 	}
 	
 	public int[][] getBoard() {
