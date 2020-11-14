@@ -62,6 +62,10 @@ public class Controller {
 		tryAction(currentPiece.rotateRight(), 0, 0);
 	}
 	
+	private boolean softDrop() {
+		return tryAction(currentPiece, 0, +1);
+	}
+
 	private class InputListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -81,7 +85,7 @@ public class Controller {
 					moveRight();
 					break;
 				case KeyEvent.VK_DOWN:
-					//softDrop();
+					softDrop();
 					break;
 				case KeyEvent.VK_SPACE:
 					//hardDrop();
@@ -118,6 +122,10 @@ public class Controller {
 		return(currentX);
 	}
 	
+	public int getCurrentY() {
+		return currentY;
+	}
+	
 	public void setCustomBoard(int[][] boardArray) {
 		board.setCustomBoard(boardArray);
 	}
@@ -140,6 +148,10 @@ public class Controller {
 	
 	public void proxyRotateRight() {
 		rotateRight();
+	}
+	
+	public void proxySoftDrop() {
+		softDrop();
 	}
 	
 	public int[][] getBoard() {
