@@ -42,7 +42,7 @@ public class Controller {
 	
 	private int generateRandomShape() {
 		Random rand = new Random();
-		int res = Math.abs(rand.nextInt()) % 6 + 1;
+		int res = Math.abs(rand.nextInt()) % 7;
 		return res;
 	}
 	
