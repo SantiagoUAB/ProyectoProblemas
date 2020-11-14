@@ -8,7 +8,7 @@ import javax.swing.WindowConstants;
 
 import ProyectoProblemas.Controller.InputListener;
 
-public class View extends JFrame {
+public class View extends JFrame implements ViewInterface {
 	private int currentX;
 	private int currentY;
 	private Piece currentPiece;
@@ -19,9 +19,8 @@ public class View extends JFrame {
 		setTitle("Tetris");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
-		setFocusable(true);
 	}
-	
+
 	public void setKeyListener(InputListener inputListener) {
 		addKeyListener(inputListener);
 	}

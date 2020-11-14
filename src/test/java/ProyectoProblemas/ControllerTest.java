@@ -11,11 +11,11 @@ import org.junit.Test;
 public class ControllerTest {
 	
 	Controller controller;
-	View view;
+	ViewInterface view;
 	
 	@Before
 	public void setUp() throws Exception {
-		View view = new View();
+		view = new ViewMock();
 		controller = new Controller(view);
 	}
 	

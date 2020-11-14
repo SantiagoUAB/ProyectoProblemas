@@ -10,12 +10,12 @@ public class Controller {
 	
 	private Piece currentPiece;
 	private Board board;
-	private View view;
+	private ViewInterface view;
 	private Timer timer;
 	private int currentX;
 	private int currentY;
 	
-	public Controller(View view) {
+	public Controller(ViewInterface view) {
 		board = new Board();
 		timer = new Timer();
 		this.view = view;
@@ -31,7 +31,7 @@ public class Controller {
 					generateNewPiece();
 					isGameOver();
 				}
-				view.arguments(currentX, currentY, board.getBoard(), currentPiece);
+				((View) view).arguments(currentX, currentY, board.getBoard(), currentPiece);
 			}
 		};
 		timer.scheduleAtFixedRate(repeatedTask, 0, 300);
