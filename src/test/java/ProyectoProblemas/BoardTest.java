@@ -14,15 +14,6 @@ public class BoardTest {
 	public void setUp() throws Exception {
 		board = new Board();
 	}
-	
-	
-    @Test
-    public void boardTest() {
-    	int rows = board.getRows();
-    	int columns = board.getColumns();
-    	assertTrue(rows==20);
-    	assertTrue(columns==10);
-    }
     
     @Test
     public void boardZeroTest() {
@@ -33,24 +24,24 @@ public class BoardTest {
     
     @Test
     public void checkCompleteLineTest() {
-    	assertFalse(board.proxyIsLineComplete(board.getRows()-1) == true);
+    	assertFalse(board.proxyIsLineComplete(Board.BOARD_ROWS-1) == true);
     	
-    	for(int i = 0; i < board.getColumns(); i++) {
-    		board.setValueToCoord(board.getRows()-1, i, 1);
+    	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
+    		board.setValueToCoord(Board.BOARD_ROWS-1, i, 1);
     	}
-    	assertTrue(board.proxyIsLineComplete(board.getRows()-1) == true);
+    	assertTrue(board.proxyIsLineComplete(Board.BOARD_ROWS-1) == true);
     }
     
     @Test
     public void removeLineTest() {
     	// Cas en el que es completa una fila no problematica
-    	for(int i = 0; i < board.getColumns(); i++) {
-    		board.setValueToCoord(board.getRows()-2, i, 1);
-    		board.setValueToCoord(board.getRows()-1, i, 2);
+    	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
+    		board.setValueToCoord(Board.BOARD_ROWS-2, i, 1);
+    		board.setValueToCoord(Board.BOARD_ROWS-1, i, 2);
     	}
-    	board.proxyRemoveLine(board.getRows()-1);
+    	board.proxyRemoveLine(Board.BOARD_ROWS-1);
     	int[][] testArray = new int[20][10];
-    	for(int i = 0; i < board.getColumns(); i++) {
+    	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
     		testArray[19][i] = 1;
     	}
     	assertTrue(Arrays.deepEquals(testArray, board.getBoard()));
@@ -58,7 +49,7 @@ public class BoardTest {
     	
     	// Cas en el que es completa la linea de més amunt (cas límit)
     	board = new Board();
-    	for(int i = 0; i < board.getColumns(); i++) {
+    	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
     		board.setValueToCoord(0, i, 1);
     	}
     	board.proxyRemoveLine(0);
@@ -68,9 +59,9 @@ public class BoardTest {
     
     @Test
     public void removeCompleteLinesTest() {
-    	for(int i = 0; i < board.getColumns(); i++) {
-    		board.setValueToCoord(board.getRows()-2, i, 1);
-    		board.setValueToCoord(board.getRows()-1, i, 1);
+    	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
+    		board.setValueToCoord(Board.BOARD_ROWS-2, i, 1);
+    		board.setValueToCoord(Board.BOARD_ROWS-1, i, 1);
     	}
     	
     	int[][] zeroArray = new int[20][10];

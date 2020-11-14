@@ -3,21 +3,43 @@ package ProyectoProblemas;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller {
 	
 	private Piece currentPiece;
 	private Board board;
+	private Timer timer;
 	private int currentX;
 	private int currentY;
 	
 	public Controller() {
 		board = new Board();
 		generateNewPiece();
+		timer = new Timer();
 	}
 
 	public void startGame() {
-		
+		View view = new View(this);
+		TimerTask repeatedTask = new TimerTask() {
+			public void run() {
+				if(!softDrop()) {
+					fixPieceToBoard();
+					generateNewPiece();
+					isGameOver();
+
+				}
+				view.repaint();
+			}
+		};
+		timer.scheduleAtFixedRate(repeatedTask, 0, 200);
+	}
+
+	private void isGameOver() {
+		if(!softDrop()) {
+			timer.cancel();
+		}
 	}
 	
 	private boolean tryAction(Piece newPiece, int moveX, int moveY) {	
@@ -35,7 +57,7 @@ public class Controller {
 	}
 	
 	private boolean outofLimit(int row, int column) {
-		return (column<0 || column >= board.getColumns() || row<0 || row>= board.getRows());
+		return (column<0 || column >= Board.BOARD_COLUMNS || row<0 || row>= Board.BOARD_ROWS);
 	}
 	
 	private int generateRandomShape() {
@@ -46,7 +68,7 @@ public class Controller {
 	
 	private void generateNewPiece() {
 		currentPiece = new Piece(generateRandomShape());
-		currentX = (int) board.getColumns() / 2;
+		currentX = Board.BOARD_COLUMNS / 2;
 		currentY = 0;
 	}
 

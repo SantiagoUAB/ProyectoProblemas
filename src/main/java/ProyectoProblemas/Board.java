@@ -1,13 +1,13 @@
 package ProyectoProblemas;
 
 public class Board {
-	private final int boardRows = 20;
-	private final int boardColumns = 10;
+	static final int BOARD_ROWS = 20;
+	static final int BOARD_COLUMNS = 10;
 	private int[][] board;
 	
 	
 	public Board() {
-		board = new int[boardRows][boardColumns];
+		board = new int[BOARD_ROWS][BOARD_COLUMNS];
 	}
 	
 	public boolean isOccupied(int row, int column) {
@@ -21,7 +21,7 @@ public class Board {
 	private boolean isLineComplete(int row) {
 		boolean complete = true;
 		int column = 0;
-		while(column < boardColumns && complete) {
+		while(column < BOARD_COLUMNS && complete) {
 			if(board[row][column] == 0) {
 				complete = false;
 			}
@@ -32,12 +32,12 @@ public class Board {
 	
 	private void removeLine(int row) {
 		if(row == 0) {
-			for(int column = 0; column < boardColumns; column++) {
+			for(int column = 0; column < BOARD_COLUMNS; column++) {
 				board[row][column] = 0;
 			}
 		} else {
 			for(int actualRow = row; actualRow > 0; actualRow--) {
-				for(int column = 0; column < boardColumns; column++) {
+				for(int column = 0; column < BOARD_COLUMNS; column++) {
 					board[actualRow][column] = board[actualRow - 1][column];
 				}
 			}
@@ -45,19 +45,11 @@ public class Board {
 	}
 
 	public void removeCompleteRows() {
-		for(int row = 0; row < boardRows; row++) {
+		for(int row = 0; row < BOARD_ROWS; row++) {
 			if(isLineComplete(row)) {
 				removeLine(row);
 			}
 		}
-	}
-	
-	public int getRows() {
-		return boardRows;
-	}
-	
-	public int getColumns() {
-		return boardColumns;
 	}
 
 	public int[][] getBoard(){
