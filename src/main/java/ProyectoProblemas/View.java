@@ -6,21 +6,28 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class View extends JFrame{
-	private Controller controller;
+import ProyectoProblemas.Controller.InputListener;
+
+public class View extends JFrame {
+	private int currentX;
+	private int currentY;
+	private Piece currentPiece;
+	private int[][] board;
 	
-	public View(Controller controller) {
-		this.controller = controller;
+	public View() {
 		setSize(200, 400);
 		setTitle("Tetris");
-		
-		addKeyListener(controller.new InputListener());
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
+		setFocusable(true);
 	}
-
-    private int squareWidth() { return (int) getSize().getWidth() / Board.BOARD_COLUMNS; }
-    private int squareHeight() { return (int) getSize().getHeight() / Board.BOARD_ROWS; }
+	
+	public void setKeyListener(InputListener inputListener) {
+		addKeyListener(inputListener);
+	}
+	
+    public int squareWidth() { return (int) getSize().getWidth() / Board.BOARD_COLUMNS; }
+    public int squareHeight() { return (int) getSize().getHeight() / Board.BOARD_ROWS; }
     
 	public void drawSquare(Graphics g, int x, int y, int shapeType) {
 		Color[] colors = {new Color(255,255,255), new Color(255,255,0), new Color(173,216,230), new Color(255,165,0), 
@@ -30,9 +37,16 @@ public class View extends JFrame{
         g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
 	}
 	
+	public void arguments(int currentX, int currentY, int[][] board, Piece currentPiece) {
+		this.currentX = currentX;
+		this.currentY = currentY;
+		this.board = board;
+		this.currentPiece = currentPiece;
+		repaint();
+	}
+	
 	public void paint(Graphics g) {
 		super.paint(g);
-		int[][] board = controller.getBoard();
 		for (int row = 0; row < 20; row++) {
 			for (int column = 0; column < 10; column++) {
 				int shape = board[row][column];
@@ -42,10 +56,9 @@ public class View extends JFrame{
 			}
 		}
 		
-		Piece currentPiece = controller.getCurrentPiece();
 		for (int i = 0; i < 4; i++) {
-			int x = controller.getCurrentX() + currentPiece.getX(i);
-			int y = controller.getCurrentY() + currentPiece.getY(i);
+			int x = currentX + currentPiece.getX(i);
+			int y = currentY + currentPiece.getY(i);
 			drawSquare(g, x*squareWidth(), y*squareHeight(), currentPiece.getShapeType() + 1);
 		}
 	}

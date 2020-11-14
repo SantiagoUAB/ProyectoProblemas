@@ -10,30 +10,31 @@ public class Controller {
 	
 	private Piece currentPiece;
 	private Board board;
+	private View view;
 	private Timer timer;
 	private int currentX;
 	private int currentY;
 	
-	public Controller() {
+	public Controller(View view) {
 		board = new Board();
-		generateNewPiece();
 		timer = new Timer();
+		this.view = view;
+		view.setKeyListener(new InputListener());
+		generateNewPiece();
 	}
-
+	
 	public void startGame() {
-		View view = new View(this);
 		TimerTask repeatedTask = new TimerTask() {
 			public void run() {
 				if(!softDrop()) {
 					fixPieceToBoard();
 					generateNewPiece();
 					isGameOver();
-
 				}
-				view.repaint();
+				view.arguments(currentX, currentY, board.getBoard(), currentPiece);
 			}
 		};
-		timer.scheduleAtFixedRate(repeatedTask, 0, 200);
+		timer.scheduleAtFixedRate(repeatedTask, 0, 300);
 	}
 
 	private void isGameOver() {
@@ -97,7 +98,7 @@ public class Controller {
 		fixPieceToBoard();
 	}
 
-	class InputListener extends KeyAdapter {
+	public class InputListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();

@@ -28,7 +28,7 @@ public class Board {
 			column++;
 		}
 		return complete;
-	}	
+	}
 	
 	private void removeLine(int row) {
 		if(row == 0) {

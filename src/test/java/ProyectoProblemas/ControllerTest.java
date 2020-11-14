@@ -4,16 +4,19 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class ControllerTest {
 	
 	Controller controller;
+	View view;
 	
 	@Before
 	public void setUp() throws Exception {
-		controller = new Controller();
+		View view = new View();
+		controller = new Controller(view);
 	}
 	
 	@Test
