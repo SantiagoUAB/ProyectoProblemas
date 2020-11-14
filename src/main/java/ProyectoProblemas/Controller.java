@@ -12,10 +12,8 @@ public class Controller {
 	private int currentY;
 	
 	public Controller() {
-		currentPiece = new Piece(generateRandomShape());
 		board = new Board();
-		currentX = 0;
-		currentY = 0;
+		generateNewPiece();
 	}
 
 	public void startGame() {
@@ -46,6 +44,12 @@ public class Controller {
 		return res;
 	}
 	
+	private void generateNewPiece() {
+		currentPiece = new Piece(generateRandomShape());
+		currentX = (int) board.getColumns() / 2;
+		currentY = 0;
+	}
+
 	private void moveLeft() {
 		tryAction(currentPiece, -1, 0);
 	}
@@ -141,6 +145,14 @@ public class Controller {
 	
 	public int proxyGenerateRandomShape(){
 		return generateRandomShape();
+	}
+	
+	public void proxyGenerateNewPiece() {
+		generateNewPiece();
+	}
+	
+	public Piece getCurrentPiece() {
+		return currentPiece;
 	}
 	
 	public void proxyMoveLeft() {
