@@ -15,7 +15,7 @@ public class View extends JFrame implements ViewInterface {
 	private int[][] board;
 	
 	public View() {
-		setSize(200, 400);
+		setSize(400, 800);
 		setTitle("Tetris");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);

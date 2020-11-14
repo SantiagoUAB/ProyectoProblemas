@@ -7,10 +7,10 @@ public class Piece {
 			{{0,0}, {0,1}, {1,1}, {1,0}},  //O
 			{{0,0}, {0,1}, {0,2}, {0,3}},  //I
 			{{0,0}, {0,1}, {0,2}, {1,0}},  //L
-			{{-1,1}, {0,1}, {0,0}, {1,0}}, //Z
-			{{0,0}, {1,0}, {1,1}, {1,2}},  //J
-			{{0,0}, {-1,1}, {0,1}, {1,1}}, //T
-			{{0,0}, {1,0}, {1,1}, {2,1}},  //S
+			{{0,0}, {0,1}, {1,0}, {-1,1}}, //Z
+			{{0,0}, {0,1}, {0,2}, {-1,0}}, //J
+			{{0,0}, {0,1}, {1,1}, {-1,1}}, //T
+			{{0,0}, {0,1}, {1,1}, {-1,0}},  //S
 	};
 	
 	public Piece(int shapeType) {
@@ -20,6 +20,9 @@ public class Piece {
 	
 	
 	public Piece rotateLeft() {
+		if(shapeType == 0) {
+			return this;
+		}
 		Piece newPiece = new Piece(shapeType);
 		int[][] newShape = new int[4][2];
 		for (int a=0; a<4; a++) {
@@ -31,6 +34,9 @@ public class Piece {
 	}
 	
 	public Piece rotateRight() {
+		if(shapeType == 0) {
+			return this;
+		}
 		Piece newPiece = new Piece(shapeType);
 		int[][] newShape = new int[4][2];
 		for (int a=0; a<4; a++) {

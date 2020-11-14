@@ -2,6 +2,9 @@ package ProyectoProblemas;
 
 import static org.junit.Assert.*;
 
+import java.awt.AWTException;
+import java.awt.Button;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 
@@ -241,5 +244,47 @@ public class ControllerTest {
 		controller.setCurrentPosition(10,5);
 		boolean caseD = controller.proxyTryAction(piece, 0, 1);
 		assertFalse(caseD);
+	}
+	
+	@Test
+	public void mockUserInputs() {
+		//KeyEvent setup
+		Button a = new Button();
+		Controller.InputListener b = controller.new InputListener();
+		KeyEvent left = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_LEFT, 'Z');
+		KeyEvent right = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_RIGHT, 'Z');
+		KeyEvent z = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_Z, 'Z');
+		KeyEvent x = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_X, 'Z');
+		KeyEvent down = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_DOWN, 'Z');
+		KeyEvent space = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_SPACE, 'Z');
+		
+		//valid move case
+		controller.setCurrentPosition(5,5);
+		controller.setCurrentPiece(5);
+		b.keyPressed(left);
+		assertTrue(controller.getCurrentX() == 4);
+		assertTrue(controller.getCurrentY() == 5);
+		
+		//valid move case
+		b.keyPressed(right);
+		assertTrue(controller.getCurrentX() == 5);
+		assertTrue(controller.getCurrentY() == 5);
+		
+		//valid move case
+		b.keyPressed(down);
+		assertTrue(controller.getCurrentX() == 5);
+		assertTrue(controller.getCurrentY() == 6);
+		
+		//valid move case
+		b.keyPressed(space);
+		assertTrue(controller.getCurrentX() == 5);
+		assertTrue(controller.getCurrentY() == 18);
+		
+		//valid rotation of piece to left and right
+		controller.setCurrentPosition(5,5);
+		int[][] beforeTest = controller.getCurrentPiece().getShape();
+		b.keyPressed(z);
+		b.keyPressed(x);
+		assertTrue(Arrays.deepEquals(beforeTest, controller.getCurrentPiece().getShape()));
 	}
 }
