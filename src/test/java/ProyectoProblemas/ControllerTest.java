@@ -103,6 +103,20 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void moveRightTest() {
+		controller.setCurrentPosition(5, 5);
+		controller.proxyMoveRight();
+		assertTrue(controller.getCurrentX()==6);
+	}
+	
+	@Test
+	public void softDropTest() {
+		controller.setCurrentPosition(5, 5);
+		controller.proxySoftDrop();
+		assertTrue(controller.getCurrentY()==6);
+	}
+	
+	@Test
 	public void fixPieceToBoardTest() {
 		//Normal insertion
 		int[][] boardArray = {
