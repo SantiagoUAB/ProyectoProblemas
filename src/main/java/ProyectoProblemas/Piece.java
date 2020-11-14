@@ -56,5 +56,4 @@ public class Piece {
 	public int getY(int block) {
 		return shape[block][1];
 	}
-	
 }

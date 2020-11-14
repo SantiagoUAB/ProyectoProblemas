@@ -17,6 +17,14 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void generateRandomShapeTest() {
+		for (int i=0; i<15; i++) {
+			int inputType = controller.proxyGenerateRandomShape();
+			assertTrue(inputType>=0 && inputType<=6);
+		}
+	}
+	
+	@Test
 	public void outofLimitTest() {
 		//normal favorable case
 		boolean caseA = controller.proxyOutofLimit(0,0);
@@ -40,66 +48,11 @@ public class ControllerTest {
 	}
 	
 	@Test
-	public void tryActionTest() {
-		int inputType = 4;
-		Piece piece = new Piece(inputType);
-		
-		//doesn't collide vertical move
-		boolean caseA = controller.proxyTryAction(piece, 0, 1);
-		assertTrue(caseA);
-		
-		//collides with wall while rotating
-		controller.setCurrentPosition(19,9);
-		boolean caseB = controller.proxyTryAction(piece.rotateLeft(), 0, 0);
-		assertFalse(caseB);
-		
-		//doesn't collide horizontal move
-		controller.setCurrentPosition(10,5);
-		boolean caseC = controller.proxyTryAction(piece, 1, 0);
-		assertTrue(caseC);
-		
-		//collides with another block
-		int[][] boardArray = {
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{0,0,0,0,0,0,0,0,0,0},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1},
-				{1,1,1,1,1,1,1,1,1,1}
-			};
-    	controller.setCustomBoard(boardArray);
-		controller.setCurrentPosition(10,5);
-		boolean caseD = controller.proxyTryAction(piece, 0, 1);
-		assertFalse(caseD);
-	}
-	
-	@Test
-	public void generateRandomShapeTest() {
-		for (int i=0; i<15; i++) {
-			int inputType = controller.proxyGenerateRandomShape();
-			assertTrue(inputType>=0 && inputType<=6);
-		}
-	}
-	
-	@Test
 	public void moveLeftTest() {
 		controller.setCurrentPosition(5, 5);
 		controller.proxyMoveLeft();
 		assertTrue(controller.getCurrentX()==4);
+		assertTrue(controller.getCurrentY()==5);
 	}
 	
 	@Test
@@ -107,6 +60,7 @@ public class ControllerTest {
 		controller.setCurrentPosition(5, 5);
 		controller.proxyMoveRight();
 		assertTrue(controller.getCurrentX()==6);
+		assertTrue(controller.getCurrentY()==5);
 	}
 	
 	@Test
@@ -114,6 +68,7 @@ public class ControllerTest {
 		controller.setCurrentPosition(5, 5);
 		controller.proxySoftDrop();
 		assertTrue(controller.getCurrentY()==6);
+		assertTrue(controller.getCurrentX()==5);
 	}
 	
 	@Test
@@ -173,5 +128,107 @@ public class ControllerTest {
 		controller.setCurrentPosition(5,5);
 		controller.proxyFixPieceToBoard();
 		assertTrue(controller.getBoard()[6][5]!=0);	
+	}
+	
+	@Test
+	public void hardDropTest() {
+		//Normal drop
+		int[][] boardArray = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1}
+			};
+		controller.setCustomBoard(boardArray);
+		controller.setCurrentPosition(0,5);
+		controller.setCurrentPiece(0);
+		controller.proxyHardDrop();
+		int[][] finalBoard = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,1,1,0,0,0},
+				{0,0,0,0,0,1,1,0,0,0},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1}
+			};
+		assertTrue(Arrays.deepEquals(finalBoard, controller.getBoard()));	
+	}
+	
+	@Test
+	public void tryActionTest() {
+		int inputType = 4;
+		Piece piece = new Piece(inputType);
+		
+		//doesn't collide vertical move
+		boolean caseA = controller.proxyTryAction(piece, 0, 1);
+		assertTrue(caseA);
+		
+		//collides with wall while rotating
+		controller.setCurrentPosition(19,9);
+		boolean caseB = controller.proxyTryAction(piece.rotateLeft(), 0, 0);
+		assertFalse(caseB);
+		
+		//doesn't collide horizontal move
+		controller.setCurrentPosition(10,5);
+		boolean caseC = controller.proxyTryAction(piece, 1, 0);
+		assertTrue(caseC);
+		
+		//collides with another block
+		int[][] boardArray = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1}
+			};
+    	controller.setCustomBoard(boardArray);
+		controller.setCurrentPosition(10,5);
+		boolean caseD = controller.proxyTryAction(piece, 0, 1);
+		assertFalse(caseD);
 	}
 }
