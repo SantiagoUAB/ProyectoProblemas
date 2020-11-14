@@ -18,7 +18,7 @@ public class PieceTest {
 	
 	@Test
 	public void createShapeTest() {		
-		int[][] testPiece = {{0,0},{1,0},{1,1},{1,2}};
+		int[][] testPiece = {{0,0}, {0,1}, {0,2}, {-1,0}};
 		int[][] jpiece = piece.getShape();
 		int shapeType = piece.getShapeType();
 		assertTrue(Arrays.deepEquals(jpiece, testPiece));
@@ -27,7 +27,7 @@ public class PieceTest {
 	
 	@Test
 	public void rotateLeftTest() {
-		int[][] testPiece = {{0,0},{0,-1},{1,-1},{2,-1}};
+		int[][] testPiece = {{0,0},{1, 0},{2, 0},{0, 1}};
 		Piece jpiece = piece.rotateLeft();
 		int[][] rotatedShape = jpiece.getShape();
 		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
@@ -35,7 +35,7 @@ public class PieceTest {
 	
 	@Test
 	public void rotateRightTest() {
-		int[][] testPiece = {{0,0},{0,1},{-1,1},{-2,1}};
+		int[][] testPiece = {{0,0},{-1, 0},{-2, 0},{0, -1}};
 		Piece jpiece = piece.rotateRight();
 		int[][] rotatedShape = jpiece.getShape();
 		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
