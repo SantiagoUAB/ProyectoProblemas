@@ -47,7 +47,7 @@ public class BoardTest {
     	assertTrue(Arrays.deepEquals(testArray, board.getBoard()));
     	
     	
-    	// Cas en el que es completa la linea de més amunt (cas límit)
+    	// Cas en el que es completa la linea de mes amunt (cas limit)
     	board = new Board();
     	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
     		board.setValueToCoord(0, i, 1);
