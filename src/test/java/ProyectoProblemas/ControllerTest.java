@@ -25,6 +25,14 @@ public class ControllerTest {
 	}
 	
 	@Test
+	public void generateNewPiece() {
+		controller.proxyGenerateNewPiece();
+		assertTrue(controller.getCurrentX() == 5);
+		assertTrue(controller.getCurrentY() == 0);
+		assertTrue(controller.getCurrentPiece() != null);
+	}
+	
+	@Test
 	public void outofLimitTest() {
 		//normal favorable case
 		boolean caseA = controller.proxyOutofLimit(0,0);
