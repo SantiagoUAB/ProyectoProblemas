@@ -14,7 +14,7 @@ public class Board {
 		return board[row][column] != 0;
 	}
 	
-	private void setValueToCoord(int row, int column, int value) {
+	public void setValueToCoord(int row, int column, int value) {
 		board[row][column] = value;
 	}
 	
@@ -44,7 +44,7 @@ public class Board {
 		}
 	}
 
-	private void RemoveCompleteRows() {
+	public void removeCompleteRows() {
 		for(int row = 0; row < boardRows; row++) {
 			if(isLineComplete(row)) {
 				removeLine(row);
@@ -66,16 +66,8 @@ public class Board {
 
 	//FUNCTIONS ONLY NEEDED FOR TESTING
 	
-	public void proxySetValueToCoord(int column, int row, int value) {
-		setValueToCoord(column, row, value);
-	}
-	
 	public boolean proxyIsLineComplete(int row) {
 		return isLineComplete(row);
-	}
-	
-	public void proxyRemoveCompleteRows() {
-		RemoveCompleteRows();
 	}
 	
 	public void proxyRemoveLine(int row) {

@@ -133,5 +133,7 @@ public class Controller {
 		rotateRight();
 	}
 	
-	
+	public int[][] getBoard() {
+		return board.getBoard();
+	}	
 }

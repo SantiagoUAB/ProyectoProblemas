@@ -2,6 +2,8 @@ package ProyectoProblemas;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,6 +87,35 @@ public class ControllerTest {
 		assertTrue(controller.getCurrentX()==4);
 	}
 	
+	@Test
+	public void fixPieceToBoardTest() {
+		int[][] boardArray = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1}
+			};
+		controller.setCustomBoard(boardArray);
+		controller.setCurrentPosition(5,5);
+		controller.fixPieceToBoard();
+		assertTrue(controller.getBoard()[5][5]!=0);	
+	}
 	
 	
 }

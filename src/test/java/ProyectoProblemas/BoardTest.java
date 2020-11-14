@@ -36,7 +36,7 @@ public class BoardTest {
     	assertFalse(board.proxyIsLineComplete(board.getRows()-1) == true);
     	
     	for(int i = 0; i < board.getColumns(); i++) {
-    		board.proxySetValueToCoord(board.getRows()-1, i, 1);
+    		board.setValueToCoord(board.getRows()-1, i, 1);
     	}
     	assertTrue(board.proxyIsLineComplete(board.getRows()-1) == true);
     }
@@ -45,8 +45,8 @@ public class BoardTest {
     public void removeLineTest() {
     	// Cas en el que es completa una fila no problematica
     	for(int i = 0; i < board.getColumns(); i++) {
-    		board.proxySetValueToCoord(board.getRows()-2, i, 1);
-    		board.proxySetValueToCoord(board.getRows()-1, i, 2);
+    		board.setValueToCoord(board.getRows()-2, i, 1);
+    		board.setValueToCoord(board.getRows()-1, i, 2);
     	}
     	board.proxyRemoveLine(board.getRows()-1);
     	int[][] testArray = new int[20][10];
@@ -59,7 +59,7 @@ public class BoardTest {
     	// Cas en el que es completa la linea de més amunt (cas límit)
     	board = new Board();
     	for(int i = 0; i < board.getColumns(); i++) {
-    		board.proxySetValueToCoord(0, i, 1);
+    		board.setValueToCoord(0, i, 1);
     	}
     	board.proxyRemoveLine(0);
     	int[][] testArray1 = new int[20][10];
@@ -69,20 +69,20 @@ public class BoardTest {
     @Test
     public void removeCompleteLinesTest() {
     	for(int i = 0; i < board.getColumns(); i++) {
-    		board.proxySetValueToCoord(board.getRows()-2, i, 1);
-    		board.proxySetValueToCoord(board.getRows()-1, i, 1);
+    		board.setValueToCoord(board.getRows()-2, i, 1);
+    		board.setValueToCoord(board.getRows()-1, i, 1);
     	}
     	
     	int[][] zeroArray = new int[20][10];
     	assertFalse(Arrays.deepEquals(zeroArray, board.getBoard()));
     	
-    	board.proxyRemoveCompleteRows();
+    	board.removeCompleteRows();
     	assertTrue(Arrays.deepEquals(zeroArray, board.getBoard()));
     }
     
     @Test
     public void isOccupiedTest() {
-    	board.proxySetValueToCoord(0, 1, 4);
+    	board.setValueToCoord(0, 1, 4);
     	boolean occupied = board.isOccupied(0, 1);
     	boolean notOccupied = board.isOccupied(0, 2);
     	assertTrue(occupied == true);
