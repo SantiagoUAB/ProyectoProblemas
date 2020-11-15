@@ -19,7 +19,7 @@ public class PieceTest {
 	@Test
 	public void createShapeTest() {		
 		int[][] testPiece = {{0,0}, {0,1}, {0,2}, {-1,0}};
-		int[][] jpiece = piece.getShape();
+		int[][] jpiece = piece.getShapeCoordinates();
 		int shapeType = piece.getShapeType();
 		assertTrue(Arrays.deepEquals(jpiece, testPiece));
 		assertTrue(shapeType == inputType);
@@ -29,15 +29,28 @@ public class PieceTest {
 	public void rotateLeftTest() {
 		int[][] testPiece = {{0,0},{1, 0},{2, 0},{0, 1}};
 		Piece jpiece = piece.rotateLeft();
-		int[][] rotatedShape = jpiece.getShape();
+		int[][] rotatedShape = jpiece.getShapeCoordinates();
 		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
+		
+		int[][] testPieceSquare = {{0,0}, {0,1}, {1,1}, {1,0}};
+		Piece pieceSqure = new Piece(0);
+		Piece rotetedSquare = pieceSqure.rotateRight();
+		int[][] rotatedSquare = rotetedSquare.getShapeCoordinates();
+		assertTrue(Arrays.deepEquals(rotatedSquare, testPieceSquare));
 	}
 	
 	@Test
 	public void rotateRightTest() {
 		int[][] testPiece = {{0,0},{-1, 0},{-2, 0},{0, -1}};
 		Piece jpiece = piece.rotateRight();
-		int[][] rotatedShape = jpiece.getShape();
+		int[][] rotatedShape = jpiece.getShapeCoordinates();
 		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
+		
+		
+		int[][] testPieceSquare = {{0,0}, {0,1}, {1,1}, {1,0}};
+		Piece pieceSqure = new Piece(0);
+		Piece rotetedSquare = pieceSqure.rotateLeft();
+		int[][] rotatedSquare = rotetedSquare.getShapeCoordinates();
+		assertTrue(Arrays.deepEquals(rotatedSquare, testPieceSquare));
 	}
 }

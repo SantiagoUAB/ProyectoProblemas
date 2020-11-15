@@ -18,18 +18,24 @@ public class Board {
 		board[row][column] = value;
 	}
 	
+	/*
+	 * This method checks if the row passed in the argument 
+	 * has any 0 in it, which means it's not complete.
+	 */
 	private boolean isLineComplete(int row) {
-		boolean complete = true;
 		int column = 0;
-		while(column < BOARD_COLUMNS && complete) {
-			if(board[row][column] == 0) {
-				complete = false;
-			}
+		while(column < BOARD_COLUMNS && board[row][column] != 0) {
 			column++;
 		}
-		return complete;
+		if(column==BOARD_COLUMNS) column--;
+		return board[row][column] != 0;
 	}
 	
+	/*
+	 * This method removes the line passed by argument,
+	 * which means make the ones above it get one row down
+	 * if the specified rows isn't the one at the top at all.
+	 */
 	private void removeLine(int row) {
 		if(row == 0) {
 			for(int column = 0; column < BOARD_COLUMNS; column++) {
@@ -43,7 +49,12 @@ public class Board {
 			}
 		}
 	}
-
+	
+	/*
+	 * This method removes the line passed by argument,
+	 * which means make the ones above it get one row down
+	 * if the specified rows isn't the one at the top at all.
+	 */
 	public void removeCompleteRows() {
 		for(int row = 0; row < BOARD_ROWS; row++) {
 			if(isLineComplete(row)) {

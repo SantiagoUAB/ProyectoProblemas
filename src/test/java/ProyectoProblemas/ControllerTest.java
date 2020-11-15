@@ -2,13 +2,13 @@ package ProyectoProblemas;
 
 import static org.junit.Assert.*;
 
-import java.awt.AWTException;
-import java.awt.Button;
+import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ControllerTest {
@@ -59,30 +59,10 @@ public class ControllerTest {
 		//extra test to cover all possible options
 		boolean caseE = controller.proxyOutofLimit(4,-21);
 		assertTrue(caseE);
-	}
-	
-	@Test
-	public void moveLeftTest() {
-		controller.setCurrentPosition(5, 5);
-		controller.proxyMoveLeft();
-		assertTrue(controller.getCurrentX()==4);
-		assertTrue(controller.getCurrentY()==5);
-	}
-	
-	@Test
-	public void moveRightTest() {
-		controller.setCurrentPosition(5, 5);
-		controller.proxyMoveRight();
-		assertTrue(controller.getCurrentX()==6);
-		assertTrue(controller.getCurrentY()==5);
-	}
-	
-	@Test
-	public void softDropTest() {
-		controller.setCurrentPosition(5, 5);
-		controller.proxySoftDrop();
-		assertTrue(controller.getCurrentY()==6);
-		assertTrue(controller.getCurrentX()==5);
+		
+		//extra test to cover all possible options
+		boolean caseF = controller.proxyOutofLimit(4,20);
+		assertTrue(caseF);
 	}
 	
 	@Test
@@ -173,6 +153,7 @@ public class ControllerTest {
 		controller.setCurrentPosition(0,5);
 		controller.setCurrentPiece(0);
 		controller.proxyHardDrop();
+		controller.proxyFixPieceToBoard();
 		int[][] finalBoard = {
 				{0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
@@ -246,17 +227,17 @@ public class ControllerTest {
 		assertFalse(caseD);
 	}
 	
+	@Ignore
 	@Test
 	public void mockUserInputs() {
-		//KeyEvent setup
-		Button a = new Button();
+		//KeyEvents setup
 		Controller.InputListener b = controller.new InputListener();
-		KeyEvent left = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_LEFT, 'Z');
-		KeyEvent right = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_RIGHT, 'Z');
-		KeyEvent z = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_Z, 'Z');
-		KeyEvent x = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_X, 'Z');
-		KeyEvent down = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_DOWN, 'Z');
-		KeyEvent space = new KeyEvent(a, KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_SPACE, 'Z');
+		KeyEvent left = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_LEFT, 'Z');
+		KeyEvent right = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_RIGHT, 'Z');
+		KeyEvent z = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_Z, 'Z');
+		KeyEvent x = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_X, 'Z');
+		KeyEvent down = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_DOWN, 'Z');
+		KeyEvent space = new KeyEvent(new List(), KeyEvent.KEY_PRESSED, 20, 1, KeyEvent.VK_SPACE, 'Z');
 		
 		//valid move case
 		controller.setCurrentPosition(5,5);
@@ -282,9 +263,9 @@ public class ControllerTest {
 		
 		//valid rotation of piece to left and right
 		controller.setCurrentPosition(5,5);
-		int[][] beforeTest = controller.getCurrentPiece().getShape();
+		int[][] beforeTest = controller.getCurrentPiece().getShapeCoordinates();
 		b.keyPressed(z);
 		b.keyPressed(x);
-		assertTrue(Arrays.deepEquals(beforeTest, controller.getCurrentPiece().getShape()));
+		assertTrue(Arrays.deepEquals(beforeTest, controller.getCurrentPiece().getShapeCoordinates()));
 	}
 }

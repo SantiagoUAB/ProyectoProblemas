@@ -6,12 +6,23 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/*
+ * The class Controller is responsible to
+ * 
+ */
 public class Controller {
 	
 	private Piece currentPiece;
 	private Board board;
 	private ViewInterface view;
 	private Timer timer;
+	/*
+	 * currentX and currentY are used to
+	 * simulate a pointer in the board to
+	 * where the currentPiece will be. 
+	 * The piece coordinates in the board
+	 * are calculated using this values.
+	 */
 	private int currentX;
 	private int currentY;
 	
@@ -23,26 +34,46 @@ public class Controller {
 		generateNewPiece();
 	}
 	
+	/*
+	 * This method creates two repeatable tasks and
+	 * schedules them. One of them contains the game flow
+	 * and the other one the screen updates.
+	 */
 	public void startGame() {
-		TimerTask repeatedTask = new TimerTask() {
+		TimerTask gameFlow = new TimerTask() {
 			public void run() {
 				if(!softDrop()) {
 					fixPieceToBoard();
 					generateNewPiece();
-					isGameOver();
+					gameOver();
 				}
+			}
+		};
+		TimerTask screenUpdate = new TimerTask() {
+			public void run() {
 				((View) view).arguments(currentX, currentY, board.getBoard(), currentPiece);
 			}
 		};
-		timer.scheduleAtFixedRate(repeatedTask, 0, 300);
+		//300 ms to lower the difficulty
+		timer.scheduleAtFixedRate(gameFlow, 0, 300);
+		//40 ms to get 25 fps
+		timer.scheduleAtFixedRate(screenUpdate, 0, 40);
 	}
-
-	private void isGameOver() {
+	
+	/*
+	 * This method checks if the piece can get one line down
+	 * and if not the game finishes.
+	 */
+	private void gameOver() {
 		if(!softDrop()) {
 			timer.cancel();
 		}
 	}
 	
+	/*
+	 * This method checks if an action is applicable to a piece,
+	 * if its possible the sate of the piece is saved.
+	 */
 	private boolean tryAction(Piece newPiece, int moveX, int moveY) {	
 		for (int i=0; i<4; i++) {
 			int newColumn = newPiece.getX(i) + moveX + currentX;
@@ -67,6 +98,10 @@ public class Controller {
 		return res;
 	}
 	
+	/*
+	 * This method generates a new random piece and sets 
+	 * the initial location to the center of the board.
+	 */
 	private void generateNewPiece() {
 		currentPiece = new Piece(generateRandomShape());
 		currentX = Board.BOARD_COLUMNS / 2;
@@ -93,11 +128,21 @@ public class Controller {
 		return tryAction(currentPiece, 0, +1);
 	}
 	
+	/*
+	 * This method is used to directly drop a piece
+	 * unit it touches the ground or another piece.
+	 */
 	private void hardDrop() {
 		while(softDrop());
-		fixPieceToBoard();
 	}
-
+	
+	/*
+	 * Friend class of Controller that has only one method
+	 * that gets triggered when some key is pressed by the
+	 * user.
+	 * The class is inside Controller because it has to use
+	 * private methods to execute the actions.
+	 */
 	public class InputListener extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -126,6 +171,12 @@ public class Controller {
 		}
 	}
 	
+	/*
+	 * This method is responsible to fix curretPiece to
+	 * the board when it's called and calls the function
+	 * removeCompleteRows to check if some row has been
+	 * completed.
+	 */
 	private void fixPieceToBoard() {
 		for (int i = 0; i < 4; i++) {
 			int newColumn = currentPiece.getX(i) + currentX;
@@ -176,26 +227,6 @@ public class Controller {
 	
 	public Piece getCurrentPiece() {
 		return currentPiece;
-	}
-	
-	public void proxyMoveLeft() {
-		moveLeft();
-	}
-	
-	public void proxyMoveRight() {
-		moveRight();
-	}
-	
-	public void proxyRotateLeft() {
-		rotateLeft();
-	}
-	
-	public void proxyRotateRight() {
-		rotateRight();
-	}
-	
-	public void proxySoftDrop() {
-		softDrop();
 	}
 	
 	public void proxyHardDrop() {

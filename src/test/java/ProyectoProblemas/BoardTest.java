@@ -24,12 +24,12 @@ public class BoardTest {
     
     @Test
     public void checkCompleteLineTest() {
-    	assertFalse(board.proxyIsLineComplete(Board.BOARD_ROWS-1) == true);
+    	assertFalse(board.proxyIsLineComplete(Board.BOARD_ROWS-1));
     	
     	for(int i = 0; i < Board.BOARD_COLUMNS; i++) {
     		board.setValueToCoord(Board.BOARD_ROWS-1, i, 1);
     	}
-    	assertTrue(board.proxyIsLineComplete(Board.BOARD_ROWS-1) == true);
+    	assertTrue(board.proxyIsLineComplete(Board.BOARD_ROWS-1));
     }
     
     @Test
@@ -78,5 +78,37 @@ public class BoardTest {
     	boolean notOccupied = board.isOccupied(0, 2);
     	assertTrue(occupied == true);
     	assertTrue(notOccupied == false);
+    }
+    
+    @Test
+    public void loopTestIsLineComplete() {
+    	//Make 0 passes through the loop
+    	int[][] mockBoard = {{0, 0, 0, 0}};
+    	board.setCustomBoard(mockBoard);
+    	assertFalse(board.proxyIsLineComplete(0));
+    	
+    	//Make 1 passes through the loop
+    	int[][] mockBoard1 = {{1, 0, 0, 0}};
+    	board.setCustomBoard(mockBoard1);
+    	board.proxyIsLineComplete(0);
+    	assertFalse(board.proxyIsLineComplete(0));
+    	
+    	//Make Max-1 passes through the loop
+    	int[][] mockBoard2 = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    	board.setCustomBoard(mockBoard2);
+    	board.proxyIsLineComplete(0);
+    	assertTrue(board.proxyIsLineComplete(0));
+    	
+    	//Make Max passes through the loop
+    	int[][] mockBoard3 = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    	board.setCustomBoard(mockBoard3);
+    	board.proxyIsLineComplete(0);
+    	assertTrue(board.proxyIsLineComplete(0));
+    	
+    	//Make Max+1 passes through the loop
+    	int[][] mockBoard4 = {{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    	board.setCustomBoard(mockBoard4);
+    	board.proxyIsLineComplete(0);
+    	assertTrue(board.proxyIsLineComplete(0));
     }
 }
