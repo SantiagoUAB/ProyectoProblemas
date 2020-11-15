@@ -16,6 +16,10 @@ public class PieceTest {
 		piece = new Piece(inputType);
 	}
 	
+	/*
+	 * Creates a J-shaped piece and asserts its coordinates
+	 * and inputType are correct. 	  
+	 */ 
 	@Test
 	public void createShapeTest() {		
 		int[][] testPiece = {{0,0}, {0,1}, {0,2}, {-1,0}};
@@ -25,6 +29,10 @@ public class PieceTest {
 		assertTrue(shapeType == inputType);
 	}
 	
+	/*
+	 * Creates a J-shaped piece and asserts its coordinates
+	 * are correct after rotating it to the left. 	  
+	 */ 
 	@Test
 	public void rotateLeftTest() {
 		int[][] testPiece = {{0,0},{1, 0},{2, 0},{0, 1}};
@@ -34,11 +42,16 @@ public class PieceTest {
 		
 		int[][] testPieceSquare = {{0,0}, {0,1}, {1,1}, {1,0}};
 		Piece pieceSqure = new Piece(0);
-		Piece rotetedSquare = pieceSqure.rotateRight();
+		Piece rotetedSquare = pieceSqure.rotateLeft();
 		int[][] rotatedSquare = rotetedSquare.getShapeCoordinates();
 		assertTrue(Arrays.deepEquals(rotatedSquare, testPieceSquare));
 	}
 	
+	/*
+	 * Creates a J-shaped piece and asserts its coordinates
+	 * are correct after rotating it to the right.
+	 * Asserts the same with a square-shaped piece. 	  
+	 */ 
 	@Test
 	public void rotateRightTest() {
 		int[][] testPiece = {{0,0},{-1, 0},{-2, 0},{0, -1}};
@@ -49,7 +62,7 @@ public class PieceTest {
 		
 		int[][] testPieceSquare = {{0,0}, {0,1}, {1,1}, {1,0}};
 		Piece pieceSqure = new Piece(0);
-		Piece rotetedSquare = pieceSqure.rotateLeft();
+		Piece rotetedSquare = pieceSqure.rotateRight();
 		int[][] rotatedSquare = rotetedSquare.getShapeCoordinates();
 		assertTrue(Arrays.deepEquals(rotatedSquare, testPieceSquare));
 	}

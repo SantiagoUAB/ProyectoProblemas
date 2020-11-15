@@ -16,12 +16,20 @@ public class ControllerTest {
 	Controller controller;
 	ViewInterface view;
 	
+	/*
+	 * We use a mocked version of the view to run the program
+	 * without the need of the interface.  
+	 */
 	@Before
 	public void setUp() throws Exception {
 		view = new ViewMock();
 		controller = new Controller(view);
 	}
 	
+	/*
+	 * Asserts in 15 tries that the randomly generated 
+	 * number are between 0 and 6 	  
+	 */ 
 	@Test
 	public void generateRandomShapeTest() {
 		for (int i=0; i<15; i++) {
@@ -30,6 +38,11 @@ public class ControllerTest {
 		}
 	}
 	
+	/*
+	 * Creates a random piece and assures that its
+	 * coordinates are correct but currentPiece has not
+	 * jet a value.
+	 */ 
 	@Test
 	public void generateNewPiece() {
 		controller.proxyGenerateNewPiece();
@@ -38,6 +51,10 @@ public class ControllerTest {
 		assertTrue(controller.getCurrentPiece() != null);
 	}
 	
+	/*
+	 * Assures for all possible cases if a certain position is
+	 * inside or outside the board.
+	 */ 
 	@Test
 	public void outofLimitTest() {
 		//normal favorable case
@@ -65,6 +82,10 @@ public class ControllerTest {
 		assertTrue(caseF);
 	}
 	
+	/*
+	 * Creates a mock board and fixes a piece in it for
+	 * the two possible cases.
+	 */ 
 	@Test
 	public void fixPieceToBoardTest() {
 		//Normal insertion
@@ -124,9 +145,12 @@ public class ControllerTest {
 		assertTrue(controller.getBoard()[6][5]!=0);	
 	}
 	
+	/*
+	 * Creates a mock board and makes a piece hard-drop
+	 * and asserts the board has been actualized well.
+	 */ 
 	@Test
 	public void hardDropTest() {
-		//Normal drop
 		int[][] boardArray = {
 				{0,0,0,0,0,0,0,0,0,0},
 				{0,0,0,0,0,0,0,0,0,0},
@@ -179,6 +203,10 @@ public class ControllerTest {
 		assertTrue(Arrays.deepEquals(finalBoard, controller.getBoard()));	
 	}
 	
+	/*
+	 * Asserts movements can (or not) be done in certain
+	 * scenarios with an empty board and with a mock board.  
+	 */ 
 	@Test
 	public void tryActionTest() {
 		int inputType = 4;
@@ -227,7 +255,11 @@ public class ControllerTest {
 		assertFalse(caseD);
 	}
 	
-	@Ignore
+	/*
+	 * Simulates the inputs of a user with mock key events to assure 
+	 * that the key inputs are managed correctly.
+	 */ 
+	//@Ignore
 	@Test
 	public void mockUserInputs() {
 		//KeyEvents setup
