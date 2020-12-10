@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
-public class PieceTestV2 {
+public class InstanceShapesTest {
     Piece piece;
     int shapeType;
 
