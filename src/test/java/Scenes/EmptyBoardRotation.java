@@ -35,41 +35,12 @@ public class EmptyBoardRotation {
   @Test
   public void rotatesPieceMiddleBoard(){
 
-    int[][] testPiece = {{0,0}, {0,1}, {0,2}, {1,0}};//L-shape
-    int[][] assertPiece = piece.getShapeCoordinates();
-    int shapeType = piece.getShapeType();
-    assertTrue(Arrays.deepEquals(assertPiece, testPiece));
-    assertEquals(shapeType, inputType);
-
-    //int[][] emptyBoard = new int[20][10];
     controller.setCustomBoard(board.getBoard());
     controller.setCurrentPosition(4,4);
     controller.setCurrentPiece(piece.getShapeType());
     controller.proxyFixPieceToBoard();
-
-    Piece newPiece = piece.rotateLeft();
-    //int[][] coord = newPiece.getShapeCoordinates();
-    controller.setCurrentPiece(newPiece);
-
-
-    controller.getCurrentPiece().rotateLeft();
+    controller.proxyRotateLeft();
     controller.proxyFixPieceToBoard();
-
-
-
-    /*@Test
-	  public void rotateLeftTest() {
-		int[][] testPiece = {{0,0},{1, 0},{2, 0},{0, 1}};
-		Piece jpiece = piece.rotateLeft();
-		int[][] rotatedShape = jpiece.getShapeCoordinates();
-		assertTrue(Arrays.deepEquals(rotatedShape, testPiece));
-
-		int[][] testPieceSquare = {{0,0}, {0,1}, {1,1}, {1,0}};
-		Piece pieceSqure = new Piece(0);
-		Piece rotetedSquare = pieceSqure.rotateLeft();
-		int[][] rotatedSquare = rotetedSquare.getShapeCoordinates();
-		assertTrue(Arrays.deepEquals(rotatedSquare, testPieceSquare));
-	}*/
 
     int[][] boardAfterRotation = {
         {0,0,0,0,0,0,0,0,0,0},

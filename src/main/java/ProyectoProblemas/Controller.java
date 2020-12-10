@@ -240,4 +240,13 @@ public class Controller {
 	public void proxyFixPieceToBoard() {
 		fixPieceToBoard();
 	}
+
+	//PROXYS CREADOS PARA TESTING PARTE 2
+	public void proxyRotateLeft(){
+		rotateLeft();
+	}
+
+	public void proxyRotateRight(){
+		moveRight();
+	}
 }
