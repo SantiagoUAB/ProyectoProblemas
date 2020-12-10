@@ -1,5 +1,6 @@
-package ProyectoProblemas;
+package Scenes;
 
+import ProyectoProblemas.Piece;
 import org.junit.jupiter.api.BeforeEach;
 
 
