@@ -38,7 +38,6 @@ public class EmptyBoardRotation {
     controller.setCustomBoard(board.getBoard());
     controller.setCurrentPosition(4,4);
     controller.setCurrentPiece(piece.getShapeType());
-    controller.proxyFixPieceToBoard();
     controller.proxyRotateLeft();
     controller.proxyFixPieceToBoard();
 
@@ -46,8 +45,8 @@ public class EmptyBoardRotation {
         {0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
-        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,3,0,0,0,0,0},
+        {0,0,0,0,3,3,3,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
         {0,0,0,0,0,0,0,0,0,0},
