@@ -10,25 +10,18 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
+
 public class InstanceShapesTest {
     Piece piece;
     int shapeType;
 
-    @BeforeEach
-    public void setUp() throws Exception{
-        shapeType = 4;
-        piece = new Piece(shapeType);
-
-        //int[][] shape0 = {{0,0}, {0,1}, {0,2}, {-1,0}};
-
-    }
 
     @Test
     public  void createShapeO(){
         shapeType = 0;
-        int[][] testShape0 = {{0,0}, {0,1}, {0,2}, {-1,0}}; // O
+        piece = new Piece(shapeType);
+        int[][] testShape0 = {{0,0}, {0,1}, {1,1}, {1,0}};
         int[][] shapeO = piece.getShapeCoordinates();
-
         assertTrue(Arrays.deepEquals(shapeO, testShape0));
     }
 
