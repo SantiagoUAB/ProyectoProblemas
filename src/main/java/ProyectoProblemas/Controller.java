@@ -32,6 +32,7 @@ public class Controller {
 		this.view = view;
 		view.setKeyListener(new InputListener());
 		generateNewPiece();
+
 	}
 	
 	/*
@@ -103,10 +104,30 @@ public class Controller {
 	 * the initial location to the center of the board.
 	 */
 	private void generateNewPiece() {
-		currentPiece = new Piece(generateRandomShape());
+		//currentPiece = new Piece(generateRandomShape());
+
+		if (currentPiece == null){
+			currentPiece =  new Piece(0);
+		}
+		else if(currentPiece.getShapeType()+1 > 6){
+			currentPiece =  new Piece(0);
+		}else{
+			currentPiece =  new Piece(currentPiece.getShapeType()+1);
+		}
 		currentX = Board.BOARD_COLUMNS / 2;
 		currentY = 0;
 	}
+
+	private Piece generateNewPieceOrder() {
+
+		if(currentPiece.getShapeType()+1 > 6 || currentPiece == null){
+			return  new Piece(0);
+		}else{
+			return  new Piece(currentPiece.getShapeType()+1);
+		}
+
+	}
+
 
 	private void moveLeft() {
 		tryAction(currentPiece, -1, 0);
