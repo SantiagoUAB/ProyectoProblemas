@@ -99,6 +99,7 @@ public class BoardTest {
     	boolean notOccupied = board.isOccupied(0, 2);
     	assertTrue(occupied == true);
     	assertTrue(notOccupied == false);
+
     }
     
     /*

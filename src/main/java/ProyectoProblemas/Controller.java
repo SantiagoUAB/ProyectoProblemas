@@ -56,7 +56,7 @@ public class Controller {
 			}
 		};
 		//300 ms to lower the difficulty
-		timer.scheduleAtFixedRate(gameFlow, 0, 300);
+		timer.scheduleAtFixedRate(gameFlow, 0, 100);
 		//40 ms to get 25 fps
 		timer.scheduleAtFixedRate(screenUpdate, 0, 300);
 	}
@@ -270,4 +270,8 @@ public class Controller {
 	public void proxyRotateRight(){
 		moveRight();
 	}
+
+	public void proxySetValueCoord(int row, int col, int type){board.setValueToCoord(row, col, type);}
+
+	public boolean proxyGetsoftDrop() {return softDrop();};
 }

@@ -111,10 +111,14 @@ public class ControllerTest {
 				{0,1,1,1,1,1,1,1,1,1},
 				{0,1,1,1,1,1,1,1,1,1}
 			};
+
+
+
 		controller.setCustomBoard(boardArray);
 		controller.setCurrentPosition(5,5);
 		controller.proxyFixPieceToBoard();
-		assertTrue(controller.getBoard()[5][5]!=0);	
+		assertTrue(controller.getBoard()[5][5]!=0);
+
 		
 		//Insertion where some full lines are deleted
 		int[][] boardArray2 = {
@@ -139,12 +143,36 @@ public class ControllerTest {
 				{0,1,1,1,1,1,1,1,1,1},
 				{1,1,1,1,1,1,1,1,1,1}
 			};
+
+		int[][] boardArray3 = {
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,0,0,0,0,0,0,0,0,0},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{0,1,1,1,1,1,1,1,1,1},
+				{1,1,1,1,1,1,1,1,1,1}
+		};
 		controller.setCustomBoard(boardArray2);
 		controller.setCurrentPosition(5,5);
 		controller.proxyFixPieceToBoard();
 		assertTrue(controller.getBoard()[6][5]!=0);	
 	}
-	
+
+
 	/*
 	 * Creates a mock board and makes a piece hard-drop
 	 * and asserts the board has been actualized well.
