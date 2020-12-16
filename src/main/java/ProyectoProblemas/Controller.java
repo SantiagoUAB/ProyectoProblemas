@@ -104,7 +104,8 @@ public class Controller {
 	 * the initial location to the center of the board.
 	 */
 	private void generateNewPiece() {
-		//currentPiece = new Piece(generateRandomShape());
+		/*Test equipment: Modified function, instead of generating the pieces randomly
+		they are generated in order.*/
 
 		if (currentPiece == null){
 			currentPiece =  new Piece(0);

@@ -36,7 +36,7 @@ public class MockEndGame {
 
             assertTrue(!controller.proxyGetsoftDrop()); // determina sie le juego finaliza
             assertFalse(controller.proxyGetsoftDrop()); // determina sie le juego finaliza
-            printBoard();
+            printBoard(typeShape);
         }
     }
 
@@ -67,7 +67,10 @@ public class MockEndGame {
         return boardArray;
     }
 
-    private void printBoard() {
+    private void printBoard(int type ) {
+        System.out.println("\n----------------------------------------");
+        System.out.println("\n------ TypeShape " + (type+1) + " -----------------");
+        System.out.println("\n----------------------------------------");
         for (int x = 0; x < controller.getBoard().length; x++){
             for (int y=0; y < controller.getBoard()[x].length; y++)
                 System.out.print(" | " + controller.getBoard()[x][y]+ " | ");
@@ -75,9 +78,7 @@ public class MockEndGame {
 
         }
 
-        System.out.println("\n----------------------------------------");
-        System.out.println("\n----------------------------------------");
-        System.out.println("\n----------------------------------------");
+
 
     }
 }
